@@ -1,0 +1,86 @@
+/* Latin */
+@font-face {
+    font-family: 'Roboto';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: url(fonts/roboto.woff2) format('woff2');
+}
+
+:root {
+    /* WCAG Color Contrast:       #000 |  #FFF */
+    --white: #fff;          /* 21.00 |  1.00 */
+    --black: #000;          /*  1.00 | 21.00 */
+    --blue: #6060ff;        /*  4.61 |  4.55  */
+    --blue-hover: #5050ff;  /*  3.93 |  5.34  */
+    --fg: #e4e4e4;          /* 16.51 */
+    --bg: #000;             /*  1.00 | */
+    --gray: #888890;        /*  5.97 | */
+    --gray-border: #383840; /*  1.80 | */
+    --gray-input: #181820;  /*  1.19 | */
+    --border: .0625rem solid var(--gray-border);
+}
+
+::selection {
+    color: var(--white);
+    background-color: var(--blue);
+}
+
+body {
+    all: unset;
+}
+
+body,
+body * {
+    display: flex;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    flex-direction: column;
+    align-items: center;
+    direction: ltr;
+    touch-action: manipulation;
+    color: var(--fg);
+    background-color: var(--bg);
+    font: 400 16px -apple-system, BlinkMacSystemFont, Roboto, 'Roboto', Helvetica, Arial, sans-serif;
+    height: 100%;
+    /* min-height: fit-content; */
+}
+
+
+/* ----- Nav ----- */
+nav {
+    position: fixed;
+    background-color: var(--bg);
+    border-bottom: var(--border);
+    width: 100%;
+    height: 3rem;
+}
+
+
+/* ----- Main ----- */
+main {
+    flex-direction: column;
+    align-items: center;
+    max-width: 48rem;
+    width: 100%;
+    padding: 3rem .5rem 0 .5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

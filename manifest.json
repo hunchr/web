@@ -1,0 +1,42 @@
+{
+    "name": "name",
+    "short_name": "$short_name",
+    "description": "$description",
+    "id": "/",
+    "start_url": "/",
+    "scope": "/",
+    "display": "minimal-ui",
+    "orientation": "portrait-primary",
+    "dir": "ltr",
+    "lang": "en-US",
+    "theme_color": "#6060ff",
+    "background_color": "#000000",
+    "categories": [
+        "social",
+        "entertainment"
+    ],
+    "icons": [
+        {
+            "src": "/_/img/icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/_/img/icon-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "/_/img/icon-m-192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/_/img/icon-m-512.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "maskable"
+        }
+    ]
+}
