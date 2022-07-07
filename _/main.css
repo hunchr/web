@@ -18,6 +18,7 @@
     --gray: #888890;        /*  5.97 | */
     --gray-border: #383840; /*  1.80 | */
     --gray-input: #181820;  /*  1.19 | */
+    --radius: .375rem;
     --border: .0625rem solid var(--gray-border);
 }
 
@@ -26,7 +27,30 @@
     background-color: var(--blue);
 }
 
-body {
+.hidden,
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+/* .hidden,
+[data-f='_B'],
+::-webkit-scrollbar,
+#home > :last-child,
+main:not(:last-of-type),
+.back #home > :first-child {
+    display: none;
+} */
+
+p,
+h1,
+h2,
+body,
+menu,
+input,
+button,
+textarea {
     all: unset;
 }
 
@@ -49,30 +73,214 @@ body {
     /* min-height: fit-content; */
 }
 
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+img,
+svg {
+    pointer-events: none;
+}
+
+img {
+    border-radius: var(--radius);
+}
+
+svg {
+    pointer-events: none;
+    aspect-ratio: 1/1;
+    fill: var(--gray);
+}
+
+h1 {
+    height: fit-content;
+}
+
+/* ----- Button ----- */
+.btn,
+.btnred,
+nav button,
+menu button {
+    align-items: center;
+    border-radius: var(--radius);
+    height: 2.5rem;
+}
+
+
+button img,
+button svg {
+    width: 1.25rem;
+    margin: .625rem;
+}
+
+/* --- Nav/Menu button --- */
+button:hover,
+button:focus-visible {
+    color: var(--white);
+}
+
+button:hover svg,
+button:focus-visible svg {
+    fill: var(--white);
+}
+
+nav button:hover,
+menu button:hover,
+nav button:focus-visible,
+menu button:focus-visible {
+    background-color: var(--blue);
+}
+
+/* --- Blue button --- */
+.btn {
+    background-color: var(--blue);
+}
+
+.btn:hover,
+.btn:focus-visible {
+    background-color: var(--blue-hover);
+}
+
+/* --- Red button --- */
+.btnred {
+    background-color: var(--red);
+}
+
+.btnred:hover,
+.btnred:focus-visible {
+    background-color: var(--red-hover);
+}
 
 /* ----- Nav ----- */
 nav {
     position: fixed;
+    justify-content: space-between;
+    align-items: center;
     background-color: var(--bg);
     border-bottom: var(--border);
     width: 100%;
     height: 3rem;
+    padding: 0 .25rem;
 }
 
+nav > div {
+    align-items: center;
+}
+
+nav button {
+    justify-content: center;
+    width: 2.5rem;
+}
 
 /* ----- Main ----- */
 main {
     flex-direction: column;
     align-items: center;
     max-width: 48rem;
-    width: 100%;
+    width: 100%;ö
+    min-height: 100%;
     padding: 3rem .5rem 0 .5rem;
+}
+
+/* ----- Menu ----- */
+menu {
+    flex-direction: column;
+    position: absolute;
+    overflow: hidden auto;
+    background-color: var(--bg);
+    border: var(--border);
+    border-radius: var(--radius);
+    width: 13.0625rem;
+    padding: .25rem;
+}
+
+menu button {
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* menu img {
+    width: 1.75rem;
+    margin: .375rem;
+} */
+
+/* --- Nav menu --- */
+nav menu {
+    position: fixed;
+    border-right: none;
+    border-radius: var(--radius) 0 0 var(--radius);
+    max-height: calc(100% - 2.96875rem);
+    top: 2.96875rem;
+    right: 0;
 }
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+/* ----- Mobile ----- */
+@media screen and (max-width: 540px) {
+    nav input,
+    .search h1 {
+        display: none;
+    }
+
+    [data-f='_B'],
+    .search nav input {
+        display: flex;
+    }
+
+
+
+    /* nav > div {
+        width: 2.5rem;
+        min-width: 0;
+    }
+
+    h1,
+    nav input {
+        position: absolute;
+        text-align: center;
+        width: calc(100% - 6rem);
+        margin: 0 2.75rem;
+    }
+
+    
+
+    nav menu {
+        max-height: calc(100% - 6.0625rem);
+    }
+
+    #bnav {
+        justify-content: space-between;
+        position: fixed;
+        border-top: var(--border);
+        width: 100%;
+        height: 3.0625rem;
+        padding: 0 .25rem;
+        bottom: 0;
+        left: 0;
+    }
+
+    #bnav button {
+        width: 20%;
+    }
+
+    main {
+        padding: 3rem .5rem;
+    } */
+}
 
 
 
