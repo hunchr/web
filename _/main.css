@@ -27,19 +27,6 @@
     background-color: var(--blue);
 }
 
-.hidden,
-[data-f='_B'],
-::-webkit-scrollbar,
-main:not(:last-of-type) {
-    display: none;
-}
-
-/*
-#home > :last-child,
-.back #home > :first-child {
-    display: none;
-} */
-
 p,
 h1,
 h2,
@@ -63,6 +50,7 @@ body {
     align-items: center;
     direction: ltr;
     touch-action: manipulation;
+    user-select: none;
     color: var(--fg);
     background-color: var(--bg);
     font: 400 16px -apple-system, BlinkMacSystemFont, Roboto, 'Roboto', Helvetica, Arial, sans-serif;
@@ -99,24 +87,43 @@ img {
 }
 
 svg {
-    pointer-events: none;
     aspect-ratio: 1/1;
     fill: var(--gray);
 }
 
+.hidden,
+[data-f='_B'],
+.back #home img,
+::-webkit-scrollbar,
+main:not(:last-of-type),
+body:not(.back) #home svg {
+    display: none;
+}
+
+.btn,
 .center {
     justify-content: center;
     align-items: center;
 }
 
-/* ----- Button ----- */
+/* ----- Buttons ----- */
 .btn,
-.btnred,
 nav button,
 menu button {
     align-items: center;
     border-radius: var(--radius);
     height: 2.5rem;
+}
+
+button:hover,
+button:focus-visible {
+    color: var(--white);
+}
+
+.btn,
+menu button:hover,
+menu button:focus-visible {
+    background-color: var(--blue);
 }
 
 button img {
@@ -129,27 +136,15 @@ button svg {
     margin: .625rem;
 }
 
-/* --- Nav/Menu button --- */
-button:hover,
-button:focus-visible {
-    color: var(--white);
-}
-
 button:hover svg,
 button:focus-visible svg {
     fill: var(--white);
 }
 
-nav button:hover,
-menu button:hover,
-nav button:focus-visible,
-menu button:focus-visible {
-    background-color: var(--blue);
-}
-
-/* --- Blue button --- */
+/* --- Filled buttons --- */
 .btn {
-    background-color: var(--blue);
+    color: var(--white);
+    width: 100%;
 }
 
 .btn:hover,
@@ -157,14 +152,23 @@ menu button:focus-visible {
     background-color: var(--blue-hover);
 }
 
-/* --- Red button --- */
-.btnred {
+.red {
     background-color: var(--red);
 }
 
-.btnred:hover,
-.btnred:focus-visible {
+.red:hover,
+.red:focus-visible {
     background-color: var(--red-hover);
+}
+
+/* --- Buttons that act as link --- */
+.a {
+    color: var(--blue);
+}
+
+.a:hover,
+.a:focus-visible {
+    color: var(--blue-hover);
 }
 
 /* ----- Nav ----- */
@@ -207,16 +211,6 @@ nav input {
     width: calc(100% - 25.5rem);
 }
 
-/* ----- Main ----- */
-main {
-    flex-direction: column;
-    align-items: center;
-    max-width: 33.75rem;
-    width: 100%;
-    min-height: 100%;
-    padding: 3rem .5rem 0 .5rem;
-}
-
 /* ----- Menu ----- */
 menu {
     flex-direction: column;
@@ -242,6 +236,16 @@ nav menu {
     max-height: calc(100% - 2.96875rem);
     top: 2.96875rem;
     right: 0;
+}
+
+/* ----- Main ----- */
+main {
+    flex-direction: column;
+    align-items: center;
+    max-width: 33.75rem;
+    width: 100%;
+    min-height: 100%;
+    padding: 3rem .5rem 0 .5rem;
 }
 
 /* ----- Mobile ----- */
@@ -291,3 +295,32 @@ nav menu {
         padding: 3rem .5rem;
     }
 }
+
+/* ----- Form ----- */
+form {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+form > * {
+    margin: .125rem 0;
+}
+
+form div {
+    color: var(--gray);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
