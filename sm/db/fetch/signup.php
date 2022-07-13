@@ -1,5 +1,5 @@
-<main class="center">
-    <form action="/sm/db/auth/signup.php" method="post">
+<main data-url="signup" data-title="Signup" class="center">
+    <form action="" method="post">
         <input type="text" placeholder="Username" maxlength="20" spellcheck="false" autocomplete="off" autofocus>
         <input type="email" placeholder="Email" maxlength="100" spellcheck="false" autocomplete="off">
         <input type="password" placeholder="Password" maxlength="1000" autocomplete="new-password">
