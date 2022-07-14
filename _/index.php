@@ -18,15 +18,26 @@ else {
 }
 
 // HTML template
-function html($title, $base, $description, $keywords, $available_langs, $css, $js, $script) {
+function html($title, $url, $base, $description, $keywords, $available_langs, $css, $js, $script) {
     global $q;
 
     // ----- CSP -----
     $nonce = base64_encode(random_bytes(18));
 
     header('Content-Type: text/html; charset=utf-8');
-    header('Content-Security-Policy: default-src \'self\'');
-    header('Content-Security-Policy: script-src \'nonce-'.$nonce.'\' \'strict-dynamic\' \'unsafe-eval\' \'unsafe-inline\'');
+    // header('Content-Security-Policy: default-src \'self\'');
+    // header('Content-Security-Policy: script-src \'nonce-'.$nonce.'\' \'strict-dynamic\' \'unsafe-eval\' \'unsafe-inline\'');
+    
+    
+    header('Content-Security-Policy: default-src \'self\'; script-src \'nonce-'.$nonce.'\' \'strict-dynamic\' \'unsafe-eval\' \'unsafe-inline\'; object-src \'none\'; connect-src \'self\'; base-uri \'self\'');
+
+
+
+
+
+
+
+
 
     // ----- Login -----
     session_start();
@@ -110,14 +121,17 @@ function html($title, $base, $description, $keywords, $available_langs, $css, $j
         <meta name="robots" content="index,follow">
         <meta property="og:title" content="'.$title.'">
         <meta property="og:description" content="'.$description.'">
-        <meta property="og:url" content="http://localhost/'.$base.'">
+        <meta property="og:url" content="http://localhost/'.$base.$url.'">
         <meta property="og:image" content="http://localhost/_/img/open-graph.png">
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="hunchr">
         <meta name="twitter:card" content="summary">
+        <link rel="canonical" href="http://localhost/'.$base.$url.'">
+        <link rel="stylesheet" href="/_/main.css">
     ';
 
     foreach ($css as $url) {
+        // $out .= '<link rel="preload" href="/'.$url.'.css" as="style" onload="this.onload=null;this.rel=\"stylesheet\"">';
         $out .= '<link rel="stylesheet" href="/'.$url.'.css">';
     }
     

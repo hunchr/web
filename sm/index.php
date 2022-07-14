@@ -13,10 +13,11 @@ if (!preg_match('/^[a-z]/', $q)) {
 html(
     $title, // TODO
     '',
+    'URL', // TODO
     'Description', // TODO
     'social,media',
     ['en','de'],
-    ['_/main', 'sm/main'],
+    ['sm/main'],
     ['_/main', 'sm/main'],
     'console.log("'.$q.'");'
 );

@@ -262,10 +262,13 @@ main {
 
     h1,
     nav input {
-        justify-content: center;
         position: absolute;
         width: calc(100% - 6rem);
         margin: 0 2.75rem;
+    }
+
+    h1 {
+        text-align: center;
     }
 
     nav > div {
