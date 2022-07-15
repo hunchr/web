@@ -1,26 +1,8 @@
 <?php
 $q = isset($_GET['q']) ? $_GET['q'] : false;
 
-// Redirect
-if (!$q) {
-    require '../index.php';
-}
-else if (!strpos($q, '/')) {
-    require '../sm/index.php';
-}
-else {
-    if (preg_match('/\.php$/', $q)) {
-        require 'errors/404.php';
-        exit();
-    }
-
-    echo 'TODO: other app = '.$q;
-}
-
 // HTML template
-function html($title, $url, $base, $description, $keywords, $available_langs, $css, $js, $script) {
-    global $q;
-
+function html($title, $url, $base, $description, $keywords, $langs, $langs_cc, $css, $js, $script) {
     // ----- CSP -----
     $nonce = base64_encode(random_bytes(18));
 
@@ -34,7 +16,9 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
     session_start();
 
     $uid = 0;
-    $preferences = 'data-base="'.$base.'"';
+    $lang = 'en-US';
+    $base = 
+    $preferences = 'data-base="'.$base.'"'; // TODO
     $logged_in = false;
 
     // User
@@ -43,6 +27,7 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
 
         // Valid auth token
         if (count($auth) === 5) {
+            $lang = $auth[1];
             $auth[0] = htmlspecialchars($auth[0]);
 
             if (preg_match('/light/', $auth[2])) $preferences .= ' data-light';
@@ -53,7 +38,7 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
             }
             // Log in
             else {
-                require '../sm/db/fetch/.sql.php';
+                require '../fetch/.sql.php';
 
                 $conn = conn();
                 $qy = $conn -> query(
@@ -74,7 +59,6 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
 
                     if (password_verify(hash("sha3-512", $_COOKIE['auth']), $qy['token'])) {
                         $uid = $qy['uid'];
-                        $_SESSION['uid'] = $uid;
                         $logged_in = true;
                     }
                 }
@@ -86,21 +70,27 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
 
     // Guest
     if (!$logged_in) {
-        preg_match_all('/[a-z]+(?=;)/', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $preferred_langs);
-        $auth = ['guest', $preferred_langs[0]]; // [username; lang]
+        preg_match_all('/[a-z]+(?=;)/', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $lang);
+        $lang = $lang[0][0];
+        $auth = ['guest']; // [username]
 
         // Delete (invalid) auth token
         unset($_COOKIE['auth']);
         setrawcookie('auth', "", time() - 3600);
     }
 
-    // Set language
-    $_SESSION['lang'] = in_array($auth[1], $available_langs) ? $auth[1] : 'en';
+    // ----- Session variables -----
+    $lang_supported = array_search($lang, $langs);
+    $lang = $lang_supported ? $langs_cc[$lang_supported] : $langs_cc[0]; // TODO
+
+    $_SESSION['lang'] = $lang;
+    // $_SESSION['lang'] = 'de-DE'; // TODO: remove (this is just a test case)
+    $_SESSION['uid'] = $uid;
 
     // ----- HTML -----
     $out = '
     <!DOCTYPE html>
-    <html lang="'.$_SESSION['lang'].'" data-name="'.$auth[0].'" '.$preferences.'>
+    <html lang="'.$lang.'" data-name="'.$auth[0].'" '.$preferences.'>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -114,33 +104,33 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
         <meta property="og:description" content="'.$description.'">
         <meta property="og:url" content="http://localhost/'.$base.$url.'">
         <meta property="og:image" content="http://localhost/_/img/open-graph.png">
+        <meta property="og:locale" content="'.$lang.'">
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="aluay">
         <meta name="twitter:card" content="summary">
         <link rel="canonical" href="http://localhost/'.$base.$url.'">
-        <link rel="stylesheet" href="/_/main.css">
     ';
 
     foreach ($css as $url) {
         // $out .= '<link rel="preload" href="/'.$url.'.css" as="style" onload="this.onload=null;this.rel=\"stylesheet\"">';
-        $out .= '<link rel="stylesheet" href="/'.$url.'.css">';
+        $out .= '<link rel="stylesheet" href="/css/'.$url.'.css">';
     }
     
     foreach ($js as $url) {
-        $out .= '<script src="/'.$url.'.js" nonce="'.$nonce.'" defer></script>';
+        $out .= '<script src="/js/'.$url.'.js" nonce="'.$nonce.'" defer></script>';
     }
 
     $out .= '
         <script nonce="'.$nonce.'" >window.addEventListener("DOMContentLoaded", () => {'.$script.'});</script>
-        <link rel="icon" type="image/svg+xml" href="/_/img/favicon.svg">
-        <link rel="apple-touch-icon" sizes="180x180" href="/_/img/apple-touch-icon.png">
+        <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
         <link rel="manifest" href="/manifest.json">
     </head>
     <body>
     <nav>
         <div>
             <button data-f="_A" aria-label="Back" id="home">
-                <img src="/_/img/apple-touch-icon.png" alt="Logo">
+                <img src="/img/apple-touch-icon.png" alt="Logo">
                 <svg viewBox="0 0 8 8"><path d="M8 3.5H1.91L4.71.7 4 0 0 4l4 4 .7-.7-2.79-2.8H8v-1z"/></svg>
             </button>
             <h1>'.$title.'</h1>
@@ -152,7 +142,7 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
             <button data-f="__" data-n="explore" aria-label="Explore"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r=".5"/><path d="M4 0C1.79 0 0 1.79 0 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm1 5L2 6l1-3 3-1-1 3z"/></svg></button>
             <button data-f="na" aria-label="Create new post"><svg viewBox="0 0 8 8"><path d="M8 3.5H4.5V0h-1v3.5H0v1h3.5V8h1V4.5H8v-1z"/></svg></button>
             <button data-f="__" data-n="inbox" aria-label="Inbox"><svg viewBox="0 0 8 8"><path d="M0 0v8h8V0H0zm7 5H5.5c0 .83-.67 1.5-1.5 1.5S2.5 5.83 2.5 5H1V1h6v4z"/></svg></button>
-            <button data-f="_C" aria-label="Account"><img src="/_/uc/s/'.$uid.'/0.webp" alt="pfp" draggable="false"></button>
+            <button data-f="_C" aria-label="Account"><img src="/uc/s/'.$uid.'/0.webp" alt="pfp" draggable="false"></button>
         </div>
         <menu class="hidden">
             <button data-f="__" data-n="profile"><svg viewBox="0 0 4 4"><circle cx="2" cy="1" r="1"/><path d="M0 4c0-1.1.9-2 2-2s2 .9 2 2"/></svg>Profile</button>

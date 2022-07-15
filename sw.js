@@ -1,10 +1,10 @@
 const v = 1,
 urls = [
     "/manifest.json",
+    "/font/roboto.woff2",
+    "/css/main.css",
+    "/js/main.js",
     "/sw.js",
-    "/_/main.js",
-    "/_/main.css",
-    "/_/fonts/roboto.woff2",
 ];
 
 self.addEventListener("install", ev => {

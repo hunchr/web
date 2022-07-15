@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
 
 let ev,
     layer,
-    base = document.querySelector("html").dataset.base || "sm/";
+    base = document.querySelector("html").dataset.base || "root/";
 
 const __todo__ = msg => console.warn(msg),
       wait = async ms => await new Promise(res => setTimeout(res, ms)),
@@ -38,7 +38,7 @@ find = () => {
 // Post data to database
 post = (fileName, data) => {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `/${base}db/post/${fileName}.php`, true);
+    xhr.open("POST", `/post/${base + fileName}.php`, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -49,9 +49,10 @@ post = (fileName, data) => {
 },
 
 fetch = async (fileName, data, extendsLayer) => {
+    console.log(`/fetch/${base + fileName}.php`);
     return await new Promise(res => {
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", `/${base}db/fetch/${fileName}.php`, true);
+        xhr.open("POST", `/fetch/${base + fileName}.php`, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
