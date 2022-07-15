@@ -1,7 +1,7 @@
 "use strict";
 // Register service worker
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register("/_/sw.js");
+    navigator.serviceWorker.register("/sw.js");
 }
 
 let ev,

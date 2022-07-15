@@ -1,11 +1,11 @@
 {
-    "name": "name",
-    "short_name": "$short_name",
-    "description": "$description",
+    "name": "aluay",
+    "short_name": "aluay",
+    "description": "A modern social media website",
     "id": "/",
     "start_url": "/",
     "scope": "/",
-    "display": "minimal-ui",
+    "display": "standalone",
     "orientation": "portrait-primary",
     "dir": "ltr",
     "lang": "en-US",
@@ -17,26 +17,58 @@
     ],
     "icons": [
         {
-            "src": "/_/img/icon-192.png",
+            "src": "/_/img/pwa-icon-192.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "/_/img/icon-512.png",
+            "src": "/_/img/pwa-icon-512.png",
             "type": "image/png",
             "sizes": "512x512"
         },
         {
-            "src": "/_/img/icon-m-192.png",
+            "src": "/_/img/pwa-icon-m-192.png",
             "type": "image/png",
             "sizes": "192x192",
             "purpose": "maskable"
         },
         {
-            "src": "/_/img/icon-m-512.png",
+            "src": "/_/img/pwa-icon-m-512.png",
             "type": "image/png",
             "sizes": "512x512",
             "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Home",
+            "short_name": "Home",
+            "url": "/home",
+            "icons": [{
+                "src": "/_/img/pwa-home-192.png",
+                "type": "image/png",
+                "sizes": "192x192"
+            }]
+        },
+        {
+            "name": "New",
+            "short_name": "New",
+            "url": "/new",
+            "icons": [{
+                "src": "/_/img/pwa-new-192.png",
+                "type": "image/png",
+                "sizes": "192x192"
+            }]
+        },
+        {
+            "name": "Inbox",
+            "short_name": "Inbox",
+            "url": "/inbox",
+            "icons": [{
+                "src": "/_/img/pwa-inbox-192.png",
+                "type": "image/png",
+                "sizes": "192x192"
+            }]
         }
     ]
 }

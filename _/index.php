@@ -25,19 +25,10 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
     $nonce = base64_encode(random_bytes(18));
 
     header('Content-Type: text/html; charset=utf-8');
-    // header('Content-Security-Policy: default-src \'self\'');
-    // header('Content-Security-Policy: script-src \'nonce-'.$nonce.'\' \'strict-dynamic\' \'unsafe-eval\' \'unsafe-inline\'');
+    header('Content-Security-Policy: default-src \'self\'; script-src \'nonce-'.$nonce.'\' \'strict-dynamic\' \'unsafe-eval\' https: \'unsafe-inline\'; object-src \'none\'; connect-src \'self\'; base-uri \'self\'');
     
-    
-    header('Content-Security-Policy: default-src \'self\'; script-src \'nonce-'.$nonce.'\' \'strict-dynamic\' \'unsafe-eval\' \'unsafe-inline\'; object-src \'none\'; connect-src \'self\'; base-uri \'self\'');
-
-
-
-
-
-
-
-
+    // ----- Cache -----
+    // header('Cache-Control: max-age=31536000');
 
     // ----- Login -----
     session_start();
@@ -115,7 +106,7 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
         <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
         <title>'.$title.'</title>
         <meta name="description" content="'.$description.'">
-        <meta name="keywords" content="hunchr,'.$keywords.','.$title.'">
+        <meta name="keywords" content="aluay,'.$keywords.','.$title.'">
         <meta name="theme-color" content="#000000">
         <meta name="referrer" content="no-referrer">
         <meta name="robots" content="index,follow">
@@ -124,7 +115,7 @@ function html($title, $url, $base, $description, $keywords, $available_langs, $c
         <meta property="og:url" content="http://localhost/'.$base.$url.'">
         <meta property="og:image" content="http://localhost/_/img/open-graph.png">
         <meta property="og:type" content="website">
-        <meta property="og:site_name" content="hunchr">
+        <meta property="og:site_name" content="aluay">
         <meta name="twitter:card" content="summary">
         <link rel="canonical" href="http://localhost/'.$base.$url.'">
         <link rel="stylesheet" href="/_/main.css">

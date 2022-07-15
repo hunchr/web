@@ -14,11 +14,11 @@ html(
     $title, // TODO
     '',
     'URL', // TODO
-    'Description', // TODO
+    'A modern social media website',
     'social,media',
     ['en','de'],
     ['sm/main'],
     ['_/main', 'sm/main'],
-    'console.log("'.$q.'");'
+    'console.log("'.$q.'");' // TODO
 );
 ?>
