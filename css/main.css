@@ -9,12 +9,12 @@
 
 :root {
     /* WCAG Color Contrast:       #000 |  #FFF */
-    --white: #fff;          /* 21.00 |  1.00 */
     --black: #000;          /*  1.00 | 21.00 */
+    --white: #fff;          /* 21.00 |  1.00 */
     --blue: #6060ff;        /*  4.61 |  4.55  */
     --blue-hover: #5050ff;  /*  3.93 |  5.34  */
-    --fg: #e4e4e4;          /* 16.51 */
     --bg: #000;             /*  1.00 | */
+    --fg: #e4e4e4;          /* 16.51 */
     --gray: #888890;        /*  5.97 | */
     --gray-border: #383840; /*  1.80 | */
     --gray-input: #181820;  /*  1.19 | */
@@ -27,6 +27,7 @@
     background-color: var(--blue);
 }
 
+/* ----- General ----- */
 p,
 h1,
 h2,
@@ -55,16 +56,15 @@ body {
     background-color: var(--bg);
     font: 400 16px -apple-system, BlinkMacSystemFont, Roboto, 'Roboto', Helvetica, Arial, sans-serif;
     height: 100%;
-    /* min-height: fit-content; */
 }
 
+/* --- Inputs --- */
 input,
 textarea {
     cursor: default;
     background-color: var(--gray-input);
     border-radius: var(--radius);
     width: 100%;
-    height: 2.5rem;
     padding: 0 .625rem;
 }
 
@@ -77,37 +77,9 @@ textarea:focus {
     color: var(--gray);
 }
 
-img,
-svg {
-    pointer-events: none;
-}
-
-img {
-    border-radius: var(--radius);
-}
-
-svg {
-    aspect-ratio: 1/1;
-    fill: var(--gray);
-}
-
-.hidden,
-[data-f='_B'],
-.back #home img,
-::-webkit-scrollbar,
-main:not(:last-of-type),
-body:not(.back) #home svg {
-    display: none;
-}
-
+/* --- Buttons --- */
 .btn,
-.center {
-    justify-content: center;
-    align-items: center;
-}
-
-/* ----- Buttons ----- */
-.btn,
+input,
 nav button,
 menu button {
     align-items: center;
@@ -121,24 +93,11 @@ button:focus-visible {
 }
 
 .btn,
+nav button:hover,
 menu button:hover,
+nav button:focus-visible,
 menu button:focus-visible {
     background-color: var(--blue);
-}
-
-button img {
-    width: 1.5rem;
-    margin: .5rem;
-}
-
-button svg {
-    width: 1.25rem;
-    margin: .625rem;
-}
-
-button:hover svg,
-button:focus-visible svg {
-    fill: var(--white);
 }
 
 /* --- Filled buttons --- */
@@ -171,34 +130,67 @@ button:focus-visible svg {
     color: var(--blue-hover);
 }
 
+/* --- Images --- */
+img,
+svg,
+#sn div {
+    pointer-events: none;
+}
+
+img {
+    border-radius: var(--radius);
+}
+
+svg {
+    aspect-ratio: 1/1;
+    fill: var(--gray);
+}
+
+button img {
+    width: 1.5rem;
+    margin: .5rem;
+}
+
+button svg {
+    width: 1.25rem;
+    margin: .625rem;
+}
+
+button:hover svg,
+button:focus-visible svg {
+    fill: var(--white);
+}
+
+/* --- Classes --- */
+#sn,
+#sn div,
+.hidden,
+nav input,
+#home svg,
+.search h1,
+.back #home img,
+::-webkit-scrollbar,
+#search > :last-child,
+.search #search > :first-child {
+    display: none;
+}
+
+.btn,
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
 /* ----- Nav ----- */
 nav {
     position: fixed;
-    justify-content: space-between;
     align-items: center;
     background-color: var(--bg);
     border-bottom: var(--border);
     width: 100%;
-    height: 3rem;
-    padding: 0 .25rem;
-}
-
-nav > div {
-    align-items: center;
-    width: calc(50% - 17.125rem);
-    min-width: 12.5rem;
-}
-
-#bnav {
-    justify-content: flex-end;
-}
-
-h1 {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: pre;
-    height: fit-content;
+    height: 3.0625rem;
+    padding: .25rem;
+    left: 0;
 }
 
 nav button {
@@ -206,21 +198,41 @@ nav button {
     width: 2.5rem;
 }
 
+h1,
 nav input {
-    max-width: 33.75rem;
-    width: calc(100% - 25.5rem);
+    margin: 0 .25rem;
+}
+
+h1 {
+    display: block;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+    font-size: 1.0625rem;
+    height: fit-content;
+}
+
+/* --- Search --- */
+.search input,
+.back #home svg,
+.search #search > :last-child {
+    display: flex;
 }
 
 /* ----- Menu ----- */
 menu {
-    flex-direction: column;
     position: absolute;
+    flex-direction: column;
     overflow: hidden auto;
     background-color: var(--bg);
-    border: var(--border);
-    border-radius: var(--radius);
-    width: 13.0625rem;
+    width: 12rem;
     padding: .25rem;
+}
+
+menu:not(#sn) {
+    border-radius: var(--radius);
+    border: var(--border);
 }
 
 menu button {
@@ -228,89 +240,107 @@ menu button {
     width: 100%;
 }
 
-/* --- Nav menu --- */
-nav menu {
+/* ----- Side nav (menu) ----- */
+#sn {
     position: fixed;
-    border-right: none;
-    border-radius: var(--radius) 0 0 var(--radius);
-    max-height: calc(100% - 2.96875rem);
-    top: 2.96875rem;
-    right: 0;
+    overflow: visible;
+    border-right: var(--border);
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.sn {
+    padding-left: 12rem;
+}
+
+.sn nav {
+    padding-left: 12.25rem;
+}
+
+.sn #sn,
+.sn #sn div {
+    display: flex;
+}
+
+/* ----- Desktop ----- */
+@media screen and (min-width: 512px) {
+    body {
+        padding-left: 3.0625rem;
+    }
+    
+    nav {
+        padding-left: 3.3125rem;
+    }
+
+    .search #bn,
+    #bn [data-f="_C"] {
+        display: none;
+    }
+
+    #sn {
+        display: flex;
+        width: 3.0625rem;
+    }
+
+    .sn #sn {
+        width: 12rem;
+    }
+}
+
+/* ----- Mobile ----- */
+@media screen and (max-width: 512px) {
+    h1 {
+        text-align: center;
+    }
+
+    #bn {
+        position: fixed;
+        background-color: var(--bg);
+        border-top: var(--border);
+        width: 100%;
+        height: 3.0625rem;
+        padding: .25rem;
+        bottom: 0;
+        left: 0;
+    }
+
+    #bn button {
+        width: 20%;
+    }
+
+    #sn {
+        width: 100%;
+        border-right: none;
+    }
+
+    main {
+        padding-bottom: 3.5rem;
+    }
 }
 
 /* ----- Main ----- */
 main {
     flex-direction: column;
     align-items: center;
-    max-width: 34.75rem;
-    width: 100%;
+    max-width: 33.75rem;
+    width: calc(100% - 1.5rem);
     min-height: 100%;
-    padding: 3rem .5rem 0 .5rem;
-}
-
-/* ----- Mobile ----- */
-@media screen and (max-width: 540px) {
-    nav input,
-    .search h1 {
-        display: none;
-    }
-
-    [data-f='_B'],
-    .search nav input {
-        display: flex;
-    }
-
-    h1,
-    nav input {
-        position: absolute;
-        width: calc(100% - 6rem);
-        margin: 0 2.75rem;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    nav > div {
-        width: 2.5rem;
-        min-width: 0;
-    }
-
-    #bnav {
-        position: fixed;
-        border-top: var(--border);
-        width: 100%;
-        height: 3rem;
-        padding: 0 .25rem;
-        bottom: 0;
-        left: 0;
-    }
-
-    #bnav button {
-        width: 20%;
-    }
-
-    nav menu {
-        max-height: calc(100% - 5.9375rem);
-    }
-
-    main {
-        padding: 3rem .5rem;
-    }
+    padding-top: 3.5rem;
 }
 
 /* ----- Form ----- */
-form {
+.f {
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
 
-form > * {
+.f > * {
     margin: .125rem 0;
 }
 
-form div {
+.f div {
     color: var(--gray);
 }
 

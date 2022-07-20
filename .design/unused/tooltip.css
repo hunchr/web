@@ -1,0 +1,27 @@
+/* ----- Desktop ----- */
+@media screen and (min-width: 512px) {
+    /* --- Tooltip --- */
+    body:not(.sn) #sn button div {
+        position: absolute;
+        white-space: pre;
+        background-color: var(--gray-input);
+        border-radius: var(--radius);
+        opacity: 0;
+        padding: .125rem .25rem;
+        left: 3.0625rem;
+        transition: opacity .3s;
+    }
+
+    body:not(.sn) #sn button:hover div {
+        opacity: 1;
+    }
+
+    body:not(.sn) #sn button:hover div::after {
+        content: '';
+        position: absolute;
+        border: .25rem solid transparent;
+        border-right-color: var(--gray-input);
+        top: .5rem;
+        left: -.5rem;
+    }
+}

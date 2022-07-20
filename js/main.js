@@ -1,8 +1,8 @@
 "use strict";
 // Register service worker
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register("/sw.js");
-}
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register("/sw.js");
+// }
 
 let ev,
     layer,
@@ -14,26 +14,8 @@ const __todo__ = msg => console.warn(msg),
       body = document.body,
       title = $("h1"),
       search = $("nav input"),
-      acc = $("menu"),
-      username = $("html").dataset.name,
+      sideNav = $("#sn"),
       layers = [],
-
-// Hide account menu
-hideAcc = () => {
-    acc.classList.add("hidden");
-    document.removeEventListener("click", hideAcc);
-},
-
-// Search
-find = () => {
-    const q = search.value.trim().toLowerCase();
-
-    if (q) {
-        body.classList.remove("search");
-        search.value = "";
-        __todo__("search");
-    }
-},
 
 // Post data to database
 post = (fileName, data) => {
@@ -48,6 +30,7 @@ post = (fileName, data) => {
     xhr.send(data);
 },
 
+// Fetch data from database
 fetch = async (fileName, data, extendsLayer) => {
     console.log(`/fetch/${base + fileName}.php`);
     return await new Promise(res => {
@@ -93,7 +76,7 @@ fun = {
         // New global layer
         $: () => {
             const temp = base;
-            base = "sm/";
+            base = "root/";
             fetch(ev.target.dataset.n);
             base = temp;
         },
@@ -103,7 +86,7 @@ fun = {
         },
         // ----- Nav -----
         // Home/Back
-        A: () => {            
+        A: () => {
             if (body.classList.contains("back")) {
                 history.back();
                 layers.pop().remove();
@@ -117,6 +100,7 @@ fun = {
         },
         // Search
         B: () => {
+            // __todo__("Search");
             if (body.classList.contains("search")) {
                 body.classList.remove("search");
                 search.value = "";
@@ -126,13 +110,9 @@ fun = {
                 search.focus();
             }
         },
-        // Account menu
+        // Side navigation
         C: () => {
-            acc.classList.toggle("hidden");
-
-            if (!acc.classList.contains("hidden")) {
-                wait(100).then(() => document.addEventListener("click", hideAcc));
-            }
+            body.classList.toggle("sn");
         },
     }
 };
@@ -149,5 +129,13 @@ document.addEventListener("click", e => {
 
 // Search
 search.addEventListener("keyup", ev => {
-    if (ev.key === "Enter") find();
+    if (ev.key === "Enter") {
+        const q = search.value.trim().toLowerCase();
+
+        if (q) {
+            body.classList.remove("search");
+            search.value = "";
+            __todo__("search: " + q);
+        }
+    }
 });
