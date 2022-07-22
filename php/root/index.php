@@ -1,13 +1,5 @@
 <?php
-require '../index.php';
-
 $title = $q;
-
-// Homepage
-if (!$q) {
-    require '../../index.php';
-    exit();
-}
 
 // Define file to fetch
 if (!preg_match('/^[a-z]/', $q)) {
@@ -24,10 +16,8 @@ html(
     $title, // TODO
     'URL', // TODO
     '',
-    'A modern social media website',
+    'A simple social media website',
     'social,media',
-    ['en','de'],
-    ['en-US','de-DE'],
     ['main', 'root/main'],
     ['main', 'root/main'],
     'fetch("'.$q.'");'

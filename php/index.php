@@ -1,8 +1,24 @@
 <?php
 $q = isset($_GET['q']) ? $_GET['q'] : false;
 
+// Redirect request
+if (!$q) {
+    require '../index.php';
+}
+else if (!strpos($q, '/')) {
+    require 'root/index.php';
+}
+else {
+    // if (preg_match('/\.php$/', $q)) {
+    //     require '../err/404.php';
+    //     exit();
+    // }
+
+    echo 'todo: other program: '.$q; // TODO
+}
+
 // HTML template
-function html($title, $url, $base, $description, $keywords, $langs, $langs_cc, $css, $js, $script) {
+function html($title, $url, $base, $description, $keywords, $css, $js, $script) {
     // ----- CSP -----
     $nonce = base64_encode(random_bytes(18));
 
@@ -17,6 +33,8 @@ function html($title, $url, $base, $description, $keywords, $langs, $langs_cc, $
 
     $uid = 0;
     $lang = 'en-US';
+    $langs = ['en','de'];
+    $langs_cc = ['en-US','de-DE'];
     $preferences = '"';
     $logged_in = false;
 
