@@ -1,2 +1,5 @@
 # Ignore user content folder
 uc
+
+# Ignore deprecated files
+.deprecated

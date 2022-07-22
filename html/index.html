@@ -48,7 +48,7 @@
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta mauris faucibus, imperdiet nisl eu, iaculis nunc. Nulla efficitur erat at dictum viverra. Aliquam scelerisque accumsan libero at finibus. Pellentesque suscipit tortor ut turpis mattis, ultrices aliquet eros sollicitudin. Donec sit amet condimentum nunc. Maecenas convallis justo et dignissim iaculis. Donec varius elit consequat diam eleifend, sed consectetur ex porta.
 </main> -->
 <!-- Signup -->
-<main data-url="signup" data-title="Signup" class="center">
+<main data-url="signup" data-title="Sign Up" class="center">
     <div class="f">
         <input type="text" placeholder="Username" maxlength="20" spellcheck="false" autocomplete="off" autofocus>
         <input type="email" placeholder="Email" maxlength="100" spellcheck="false" autocomplete="off">
@@ -57,7 +57,22 @@
         <button data-f="Lb" class="btn">Sign Up</button>
         <div>Already have an account?&nbsp;<button data-f="_$" data-n="login" class="a">Log In</button></div>
     </div>
+    <div class="f hidden">
+        <input type="text" placeholder="Email Verification Code" maxlength="8" spellcheck="false" autocomplete="off">
+        <button data-f="Lc" class="btn">Verify</button>
+        <div>Check your email for the verification code.</div>
+    </div>
 </main>
+<!-- Login -->
+<!-- <main data-url="login" data-title="Log In" class="center">
+    <div class="f">
+        <input type="text" placeholder="Username" maxlength="20" spellcheck="false" autocomplete="username" autofocus>
+        <input type="password" placeholder="Password" maxlength="1000" autocomplete="current-password">
+        <button data-f="La" class="btn">Log In</button>
+        <div>Don't have an account?&nbsp;<button data-f="_$" data-n="signup" class="a">Sign Up</button></div>
+    </div>
+</main> -->
+
 
 </body>
 </html>

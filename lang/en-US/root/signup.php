@@ -8,5 +8,8 @@ $v = [
     'Sign Up',
     'Already have an account?',
     'Log In',
+    'Email Verification Code',
+    'Verify',
+    'Check your email for the verification code.'
 ];
 ?>

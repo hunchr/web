@@ -1,12 +1,11 @@
 "use strict";
-// Register service worker
+// Register service worker // TODO: uncomment
 // if ('serviceWorker' in navigator) {
 //     navigator.serviceWorker.register("/sw.js");
 // }
 
 let ev,
-    layer,
-    base = document.querySelector("html").dataset.base || "root/";
+    layer;
 
 const __todo__ = msg => console.warn(msg),
       wait = async ms => await new Promise(res => setTimeout(res, ms)),
@@ -16,6 +15,22 @@ const __todo__ = msg => console.warn(msg),
       search = $("nav input"),
       sideNav = $("#sn"),
       layers = [],
+
+// Show popup
+showPopup = (title, text, continueText, cancelText) => {
+    console.log(title, text, continueText, cancelText); // TODO
+},
+
+// Get form data
+getFormData = e => {
+    let data = "";
+
+    layer.querySelectorAll(e).forEach((e, i) => {
+        data += `${i}=${e.value}&`;
+    });
+
+    return data;
+},
 
 // Post data to database
 post = (fileName, data) => {
@@ -31,11 +46,11 @@ post = (fileName, data) => {
 },
 
 // Fetch data from database
-fetch = async (fileName, data, extendsLayer) => {
-    console.log(`/fetch/${base + fileName}.php`);
+fetch = async (fileName, data, extendsLayer, isGlobal) => {
+    // console.log(`/fetch/${(isGlobal ? "root" : base) + fileName}.php`);
     return await new Promise(res => {
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", `/fetch/${base + fileName}.php`, true);
+        xhr.open("POST", `/fetch/${(isGlobal ? "root/" : base) + fileName}.php`, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -75,10 +90,7 @@ fun = {
     _: {
         // New global layer
         $: () => {
-            const temp = base;
-            base = "root/";
-            fetch(ev.target.dataset.n);
-            base = temp;
+            fetch(ev.target.dataset.n, "", false, true);
         },
         // New layer
         _: () => {
@@ -100,7 +112,6 @@ fun = {
         },
         // Search
         B: () => {
-            // __todo__("Search");
             if (body.classList.contains("search")) {
                 body.classList.remove("search");
                 search.value = "";
@@ -114,6 +125,50 @@ fun = {
         C: () => {
             body.classList.toggle("sn");
         },
+    }
+};
+
+// Login functions
+fun.L = {
+    // Login
+    a: () => {
+        fetch("/auth/login", getFormData("input"), true, true).then(data => {
+            if (data) {
+                showPopup(...data.split(";"));
+            }
+            else {
+                if (location.pathname === "/login") {
+                    location.href = "/home";
+                }
+                else {
+                    location.reload();
+                }
+            }
+        });
+    },
+    // Signup
+    b: () => {
+        fetch("/auth/signup", getFormData(".f:first-child input"), true, true).then(data => {
+            if (data) {
+                showPopup(...data.split(";"));
+            }
+            else {
+                layer.querySelector(".hidden").classList.remove("hidden");
+                layer.querySelector(".f").remove();
+            }
+        });
+    },
+    // Email verification
+    c: () => {
+        fetch("/auth/email", getFormData(".f input"), true, true).then(data => {
+            if (data) {
+                showPopup(...data.split(";"));
+            }
+            else {
+                // Redirect to login
+                fetch("login", "", false, true);
+            }
+        });
     }
 };
 

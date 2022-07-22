@@ -17,13 +17,12 @@ function html($title, $url, $base, $description, $keywords, $langs, $langs_cc, $
 
     $uid = 0;
     $lang = 'en-US';
-    $base = 
-    $preferences = 'data-base="'.$base.'"'; // TODO
+    $preferences = '"';
     $logged_in = false;
 
     // User
     if (isset($_COOKIE['auth'])) {
-        $auth = explode(';', base64_decode($_COOKIE['auth']), 5); // [username; lang; light, show-nsfw; date; token]
+        $auth = explode(';', base64_decode($_COOKIE['auth']), 5); // [username; lang; display; date; token]
 
         // Valid auth token
         if (count($auth) === 5) {
@@ -38,7 +37,7 @@ function html($title, $url, $base, $description, $keywords, $langs, $langs_cc, $
             }
             // Log in
             else {
-                require '../fetch/.sql.php';
+                require '../../.sql.php';
 
                 $conn = conn();
                 $qy = $conn -> query(
@@ -90,7 +89,7 @@ function html($title, $url, $base, $description, $keywords, $langs, $langs_cc, $
     // ----- HTML -----
     $out = '
     <!DOCTYPE html>
-    <html lang="'.$lang.'" '.$preferences.'>
+    <html lang="'.$lang.$preferences.'>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -121,9 +120,11 @@ function html($title, $url, $base, $description, $keywords, $langs, $langs_cc, $
     }
 
     $out .= '
-        <script nonce="'.$nonce.'" >
+        <script nonce="'.$nonce.'">
+            const username = "'.$auth[0].'",
+                  base = "'.($base ? $base : 'root/').'";
+
             window.addEventListener("DOMContentLoaded", () => {
-                const username = "'.$auth[0].'";
                 '.$script.'
             });
         </script>

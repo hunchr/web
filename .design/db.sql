@@ -20,7 +20,7 @@ create table users (
     name varchar(20) not null unique,
     email varchar(100) not null,
     pw char(97) not null,
-    lang enum("en", "de") not null,
+    lang enum("en-US", "de-DE") not null default "en-US",
     display set("light","show-nsfw") not null default "",
     special set("premium","verified","bot","admin") not null default "",
     foreign key (uid) references subs (id)

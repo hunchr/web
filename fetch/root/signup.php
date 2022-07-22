@@ -11,6 +11,11 @@ exit(
         <button data-f="Lb" class="btn">'.$v[5].'</button>
         <div>'.$v[6].'&nbsp;<button data-f="_$" data-n="login" class="a">'.$v[7].'</button></div>
     </div>
+    <div class="f hidden">
+        <input type="text" placeholder="'.$v[8].'" maxlength="8" spellcheck="false" autocomplete="off">
+        <button data-f="Lc" class="btn">'.$v[9].'</button>
+        <div>'.$v[10].'</div>
+    </div>
 </main>'
 );
 ?>
