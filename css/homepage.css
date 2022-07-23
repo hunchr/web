@@ -1,0 +1,124 @@
+/* Latin */
+@font-face {
+    font-family: 'Roboto';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: url(../font/roboto.woff2) format('woff2');
+}
+
+:root {
+    /* WCAG Color Contrast:       #000 |  #FFF */
+    --black: #000;          /*  1.00 | 21.00 */
+    --white: #fff;          /* 21.00 |  1.00 */
+    --blue: #6060ff;        /*  4.61 |  4.55  */
+    --blue-hover: #5050ff;  /*  3.93 |  5.34  */
+    --bg: #000;             /*  1.00 | */
+    --fg: #e4e4e4;          /* 16.51 */
+    --gray: #888890;        /*  5.97 | */
+    --gray-border: #383840; /*  1.80 | */
+    --gray-input: #181820;  /*  1.19 | */
+    --radius: .375rem;
+    --border: .0625rem solid var(--gray-border);
+}
+
+::selection {
+    color: var(--white);
+    background-color: var(--blue);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* ----- General ----- */
+p,
+h1,
+h2,
+body,
+button {
+    all: unset;
+}
+
+body,
+body * {
+    display: flex;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    flex-direction: column;
+    direction: ltr;
+    touch-action: manipulation;
+    color: var(--fg);
+    background-color: var(--bg);
+    font: 400 16px -apple-system, BlinkMacSystemFont, Roboto, 'Roboto', Helvetica, Arial, sans-serif;
+    height: 100%;
+}
+
+/* ----- Main ----- */
+/* Sections */
+section {
+    background-position: top, bottom;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 100%;
+    /* min-height: 100%; */
+    min-height: 20rem;
+    /* min-height: 50%; */
+    padding: 1rem;
+    /* min-height: 60rem; */
+}
+
+section:nth-child(2n-1) {
+    flex-direction: row-reverse;
+    background-color: var(--gray-input);
+}
+
+section > div {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+/* --- Text --- */
+section > :first-child {
+    padding: 0 4rem;
+}
+
+section h2 {
+    font-weight: 600;
+    font-size: 20px;
+    width: 100%;
+}
+
+/* --- Image --- */
+section img {
+    height: 100%;
+}
+
+/* ----- Mobile layout ----- */
+@media screen and (max-width: 400px) {
+    section {
+        flex-direction: column !important;
+    }
+
+    section > div {
+        width: 100%;
+        height: 50%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -263,7 +263,7 @@ menu button {
     display: flex;
 }
 
-/* ----- Desktop ----- */
+/* ----- Desktop layout ----- */
 @media screen and (min-width: 512px) {
     body {
         padding-left: 3.0625rem;
@@ -288,7 +288,7 @@ menu button {
     }
 }
 
-/* ----- Mobile ----- */
+/* ----- Mobile layout ----- */
 @media screen and (max-width: 512px) {
     h1 {
         text-align: center;
