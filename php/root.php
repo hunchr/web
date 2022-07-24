@@ -18,8 +18,8 @@ html(
     '',
     'A simple social media website',
     'social,media',
-    ['main', 'root-main'],
-    ['main', 'root-main'],
+    ['main', 'root'],
+    ['main', 'root'],
     'fetch("'.$q.'");'
 );
 ?>

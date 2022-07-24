@@ -6,7 +6,7 @@ if (!$q) {
     require 'homepage.php';
 }
 else if (!strpos($q, '/')) {
-    require 'root-index.php';
+    require 'root.php';
 }
 else {
     // if (preg_match('/\.php$/', $q)) {
