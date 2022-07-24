@@ -4,7 +4,7 @@ header('Content-Type: text/html; charset=utf-8');
 
 if (!isset($_SESSION['uid'])) exit('ERR_NO_USER_ID'); // TODO
 
-$q = isset($_POST['q']) ? strtolower($_POST['q']) : '';
+$q = isset($_POST['q']) ? strtolower(htmlspecialchars($_POST['q'])) : '';
 $uid = $_SESSION['uid'];
 $lang = $_SESSION['lang'];
 $fetch = '';

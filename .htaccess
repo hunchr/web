@@ -6,4 +6,4 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /php/index.php?q=$1 [L]
 
-ErrorDocument 500 "500 - Internal Server Error"
+ErrorDocument 500 "500: Internal Server Error"

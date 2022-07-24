@@ -5,6 +5,6 @@ $v = [
     'Password',
     'Log In',
     'Don\'t have an account?',
-    'Sign Up',
+    'Sign Up'
 ];
 ?>

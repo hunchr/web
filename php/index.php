@@ -3,10 +3,10 @@ $q = isset($_GET['q']) ? $_GET['q'] : false;
 
 // Redirect request
 if (!$q) {
-    require '../index.php';
+    require 'homepage.php';
 }
 else if (!strpos($q, '/')) {
-    require 'root/index.php';
+    require 'root-index.php';
 }
 else {
     // if (preg_match('/\.php$/', $q)) {

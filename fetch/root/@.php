@@ -1,34 +1,34 @@
 <?php
 require '.php';
-$name = $q;
+$name = substr($q, 1);
 
-if (!preg_match('/^@[\w.-]{2,20}$/', $name)) e404();
+if (!preg_match('/^[\w.-]{2,20}$/', $name)) e404();
 
 // ----- Profile -----
-// $q =
-// 'SELECT s.*, UNIX_TIMESTAMP(s.created_at) AS created_at,'
-// .($uid ?
-//     'IF ((SELECT uid FROM liked_subs l WHERE l.uid = '.$uid.' AND l.sid = s.id), TRUE, NULL) AS liked':
-//     'NULL AS liked'
-// ).'
-// FROM subs s
-// WHERE s.id = (SELECT uid FROM users u WHERE u.name = "'.$name.'");';
+$q =
+'SELECT s.*, UNIX_TIMESTAMP(s.created_at) AS created_at,'
+.($uid ?
+    'IF ((SELECT uid FROM liked_subs l WHERE l.uid = '.$uid.' AND l.sid = s.id), TRUE, NULL) AS liked':
+    'NULL AS liked'
+).'
+FROM subs s
+WHERE s.id = (SELECT uid FROM users u WHERE u.name = "'.$name.'");';
 
-// conn(
-//     false,
-//     true,
-//     function($q) {
-//         global $name;
-//         global $fetch;
+conn(
+    false,
+    true,
+    function($q) {
+        global $name;
+        global $fetch;
 
-//         $fetch .= '
-//         <main>
-//         <article class="p">
-//             todo: profile
-//         </article>
-//         '; // TODO
-//     }
-// );
+        $fetch .= '
+        <main>
+        <article class="p">
+            todo: profile (@'.$name.')
+        </article>
+        '; // TODO
+    }
+);
 
 // ----- Posts -----
 $q =
