@@ -1,0 +1,76 @@
+/* ----- 'More' menu ----- */
+body > #more {
+    display: none;
+}
+
+/* ----- Post ----- */
+.p {
+    flex-direction: column;
+    color: var(--gray);
+}
+
+.p,
+.p img,
+.p > * {
+    width: 100%;
+}
+
+/* --- Heading --- */
+.p > :first-child {
+    position: relative;
+    padding-right: 1.125rem;
+}
+
+.p > :first-child > :first-child {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+[data-f="pc"] {
+    position: absolute;
+    justify-content: center;
+    width: 1rem;
+    height: 100%;
+    right: 0;
+}
+
+[data-f="pc"] svg {
+    margin: 0;
+}
+
+/* --- Content --- */
+.p p,
+.p h2 {
+    color: var(--fg);
+}
+
+.p h2 {
+    font-weight: 600;
+    font-size: 1.0625rem;
+}
+
+/* --- Media --- */
+.p img,
+.p > :last-child {
+    margin-top: .125rem;
+}
+
+/* --- Buttons --- */
+.p > :last-child {
+    justify-content: space-between;
+}
+
+.p > div > svg,
+.p > div > button > svg {
+    width: .875rem;
+    min-width: .875rem;
+    margin: 0 .125rem 0 0;
+}
+
+
+
+
+
+
+
